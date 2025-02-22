@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import { useTheme } from '@mui/material/styles';
 
+import { useUser } from 'src/hooks/use-user';
+
 import { _langs, _notifications } from 'src/_mock';
 
 import { Iconify } from 'src/components/iconify';
@@ -39,6 +41,11 @@ export function DashboardLayout({ sx, children, header }: DashboardLayoutProps) 
   const [navOpen, setNavOpen] = useState(false);
 
   const layoutQuery: Breakpoint = 'lg';
+  const user = useUser();
+
+  if (!user) {
+    return '';
+  }
 
   return (
     <LayoutSection

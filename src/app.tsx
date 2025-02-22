@@ -1,5 +1,8 @@
 import 'src/global.css';
 
+import { useNavigate } from 'react-router-dom';
+import { AuthKitProvider } from '@workos-inc/authkit-react';
+
 import Fab from '@mui/material/Fab';
 
 import { Router } from 'src/routes/sections';
@@ -14,6 +17,7 @@ import { Iconify } from 'src/components/iconify';
 
 export default function App() {
   useScrollToTop();
+  const navigate = useNavigate();
 
   const githubButton = (
     <Fab
@@ -36,9 +40,19 @@ export default function App() {
   );
 
   return (
-    <ThemeProvider>
-      <Router />
-      {githubButton}
-    </ThemeProvider>
+    <AuthKitProvider
+      clientId={import.meta.env.VITE_WORKOS_CLIENT_ID}
+      apiHostname={import.meta.env.VITE_WORKOS_API_HOSTNAME}
+      onRedirectCallback={({ state }) => {
+        if (state?.returnTo) {
+          navigate(state.returnTo);
+        }
+      }}
+    >
+      <ThemeProvider>
+        <Router />
+        {githubButton}
+      </ThemeProvider>
+    </AuthKitProvider>
   );
 }
