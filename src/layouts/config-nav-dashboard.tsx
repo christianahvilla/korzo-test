@@ -35,8 +35,13 @@ export const navData = [
   },
   {
     title: 'Sign in',
-    path: '/sign-in',
+    path: '/login',
     icon: icon('ic-lock'),
+  },
+  {
+    title: 'Apple',
+    path: '/apple',
+    icon: icon('ic-analytics'),
   },
   {
     title: 'Not found',
