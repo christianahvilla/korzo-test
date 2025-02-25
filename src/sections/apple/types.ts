@@ -1,4 +1,5 @@
 export interface StockData {
+  id: string;
   date: string;
   close: number;
 }
